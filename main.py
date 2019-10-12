@@ -15,6 +15,7 @@ def hello_world():
         weather = request1(appkey1, city)
         live = request2(appkey1, city)
         air = request3(appkey1, city)
+        news = request4("", city)
         Data = {
             "city" : city,
             "temperature" : weather["temperature"],
@@ -25,6 +26,16 @@ def hello_world():
             "air_primary" : air["primary_pollutant"],
             "air_suggestion" : live["air_pollution"]["details"],
             "live_comfort" : live["comfort"]["brief"],
+            "news_title0" : news["title"][0],
+            "news_title1" : news["title"][1],
+            "news_title2" : news["title"][2],
+            "news_title3" : news["title"][3],
+            "news_title4" : news["title"][4],
+            "news_link0" : news["link"][0],
+            "news_link1" : news["link"][1],
+            "news_link2" : news["link"][2],
+            "news_link3" : news["link"][3],
+            "news_link4" : news["link"][4],
         }
         
     return render_template('index.html', Data = Data)
@@ -115,48 +126,10 @@ def request4(appkey, city, m="GET"):
     res = json.loads(content)
     #print(res)  
     if res:
-        rst = res
-        return rst
+        rst = res["showapi_res_body"]["pagebean"]["contentlist"][:5]
+        return {"title" : [i["title"] for i in rst], "link" : [i["link"] for i in rst]}
     else:
         return {"error" : "lost api"}
 if __name__ == "__main__":
-    #app.run(host="127.0.0.1",port=5000,debug = True)
-    print(request4("f598ed3b6a2b4b67834bccf4ef48057a", "北京"))
-
-    {
-    'showapi_res_error': '', 
-    'showapi_res_id': '12a9f17831a74cdebd930b56c85aa0cb', 
-    'showapi_res_code': 0, 
-    'showapi_res_body': {'ret_code': 0, 
-    'pagebean': {'allPages': 72, 
-    'contentlist': [
-     {'id': '97ebd75d3ccc42df677540bae30c1e65', 
-     'pubDate': '2019-10-11 10:56:00', 
-     'title': '朝阳不动产登记大厅“人脸识别” ', 
-     'imageurls': [], 
-     'desc': '', 
-     'areaName': '北京', 
-     'source': '中国新闻网', 
-     'link': 'http://www.bj.chinanews.com/news/2019/1011/73582.html', 
-     'img': '', 
-     'ct': '2019-10-12 15:31:37.107', 
-     'areaId': '55818af5085b7bc0c73836b4'}, 
-     {'id': '174dee6c1a97720da4c62941575d07c5', 
-     'pubDate': '2019-10-11 09:52:00', 
-     'title': '421个老旧小区配电网陆续改造 ', 
-     'imageurls': [], 
-     'desc': '', 
-     'areaName': '北京', 
-     'source': '中国新闻网', 
-     'link': 'http://www.bj.chinanews.com/news/2019/1011/73580.html', 
-     'img': '', 
-     'ct': '2019-10-12 15:31:37.130', 
-     'areaId': '55818af5085b7bc0c73836b4'}, 
-     {'id': '109e5231150f2d415417010dad8a9ed7', 
-     'pubDate': '2019-10-10 23:51:00', 
-     'title': '国庆群众游行“高定服装”:10万套一月制 细节处显用心', 
-     'imageurls': [], 'desc': '', 'areaName': '北京', 'source': '', 
-     'link': 'http://www.bj.chinanews.com/news/2019/1010/73578.html', 
-     'img': '', 'ct': '2019-10-11 00:02:01.076', 'areaId': '55818af5085b7bc0c73836b4'}, 
-     ], 
-     'currentPage': 1, 'allNum': 718, 'maxResult': 10}}}
+    app.run(host="127.0.0.1",port=5000,debug = True)
+    #print(request4("f598ed3b6a2b4b67834bccf4ef48057a", "北京"))
