@@ -13,6 +13,7 @@ print(response.keys())
 '''
 @app.route('/', methods=["GET","POST"])
 def hello_world():
+    Data = {"city" : "上海"}
     if request.method == "POST":
         form_data = request.form
         city = form_data.get("search")
