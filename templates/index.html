@@ -16,11 +16,13 @@
         }
         
         h1 {
+            margin: 0;
             margin-left: 110px;
             margin-bottom: 5px;
         }
         
         .input1 {
+            float: left;
             padding: 0;
             width: 80%;
             margin-left: 10px;
@@ -28,6 +30,7 @@
         }
         
         .button1 {
+            float: left;
             padding: 0;
             width: 40px;
             margin-left: 5px;
@@ -63,15 +66,16 @@
 </head>
 
 <body>
-
-    <div id="searchbox" style="width:400px;height:100px;margin:auto;margin-top:100px;background: aquamarine;">
-        <h1 id="cc">{{Data.city}}</h1>
-        <form method="post">
-            <input name="search" id="searchplace" class="input1" required>
-            <input type="submit" id="search" value="Search" class="button1">
-        </form>
+    <div style="width:550px;height:100px;margin:auto;margin-top:100px;">
+        <div id="searchbox" style="float:left;width:400px;height:100px;background: aquamarine;">
+            <h1>Search City</h1>
+            <form method="post" style="float:left;width:100%">
+                <input name="search" id="searchplace" class="input1" required>
+                <input type="submit" id="search" value="Search" class="button1">
+            </form>
+        </div>
+        <div id="cc" style="float:left;margin-left:50px;font-size:30px;width:100px;height:100px;text-align:center;line-height: 100px;background: blueviolet;">{{Data.city}}</div>
     </div>
-
     <div style="width:1030px;margin:auto;">
         <div id="searchbox" class="box1" style="width:700px;margin-left:0;background:white">
             <div id="searchbox" class="box2" style="margin-top:0;height:120px">
@@ -79,7 +83,11 @@
             </div>
             <div id="searchbox" class="box2" style="height:170px;">
                 <div id="searchbox" class="box3" style="margin-left:0;width:228px">
-
+                    <p>{{Data.weather}} {{Data.city}} {{Data.temperature}}</p>
+                    <p>空气指数：{{Data.air_aqi}}</p>
+                    <p>空气质量：{{Data.air_quality}} pm2.5指数：{{Data.air_pm25}}</p>
+                    <p>主要污染物：{{Data.air_primary}} 建议：{{Data.air_suggestion}}</p>
+                    <p>总体情况：{{Data.live_comfort}}</p>
                 </div>
                 <div id="searchbox" class="box3">
 
