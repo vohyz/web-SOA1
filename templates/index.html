@@ -90,11 +90,11 @@
                     <p>总体情况：{{Data.live_comfort}}</p>
                 </div>
                 <div id="searchbox" class="box3">
-                    <a href="{{Data.news_link0}}">{{Data.news_title0}}</a>
-                    <a href="{{Data.news_link0}}">{{Data.news_title0}}</a>
-                    <a href="{{Data.news_link0}}">{{Data.news_title0}}</a>
-                    <a href="{{Data.news_link0}}">{{Data.news_title0}}</a>
-                    <a href="{{Data.news_link0}}">{{Data.news_title0}}</a>
+                    {% for i in Data.news %}
+                    <p>
+                        <a href="{{i[1]}}">{{i[0]}}</a>
+                    </p>
+                    {% endfor %}
                 </div>
                 <div id="searchbox" class="box3">
 

@@ -26,18 +26,8 @@ def hello_world():
             "air_primary" : air["primary_pollutant"],
             "air_suggestion" : live["air_pollution"]["details"],
             "live_comfort" : live["comfort"]["brief"],
-            "news_title0" : news["title"][0],
-            "news_title1" : news["title"][1],
-            "news_title2" : news["title"][2],
-            "news_title3" : news["title"][3],
-            "news_title4" : news["title"][4],
-            "news_link0" : news["link"][0],
-            "news_link1" : news["link"][1],
-            "news_link2" : news["link"][2],
-            "news_link3" : news["link"][3],
-            "news_link4" : news["link"][4],
+            "news" : news,
         }
-        
     return render_template('index.html', Data = Data)
 
 #天气信息查询
@@ -126,10 +116,21 @@ def request4(appkey, city, m="GET"):
     res = json.loads(content)
     #print(res)  
     if res:
-        rst = res["showapi_res_body"]["pagebean"]["contentlist"][:5]
-        return {"title" : [i["title"] for i in rst], "link" : [i["link"] for i in rst]}
+        rst = res["showapi_res_body"]["pagebean"]["contentlist"]
+        n = 0
+        prm = []
+        for i in rst:
+            if n < 3:
+                prm.append([i["title"],i["link"].strip('"')])
+            else:
+                break
+            n += 1
+        print(prm)
+        return prm
     else:
         return {"error" : "lost api"}
+
+
 if __name__ == "__main__":
     app.run(host="127.0.0.1",port=5000,debug = True)
     #print(request4("f598ed3b6a2b4b67834bccf4ef48057a", "北京"))
