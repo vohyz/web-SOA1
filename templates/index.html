@@ -7,6 +7,11 @@
     <style type="text/css">
         body,
         html,
+        a {
+            text-decoration: none;
+            color: black;
+        }
+        
         #allmap {
             width: 100%;
             height: 100%;
@@ -35,30 +40,39 @@
             width: 40px;
             margin-left: 5px;
             height: 40px;
-            background: rgb(100, 194, 237);
+            background: url(../img/search.png)
         }
         
         .box1 {
             float: left;
-            margin-left: 10px;
-            height: 300px;
+            margin-left: 30px;
+            height: 400px;
             margin-top: 30px;
-            background: bisque
+            background: rgba(255, 228, 196, 0.973)
         }
         
         .box2 {
-            width: 700px;
+            width: 100%;
             margin-top: 10px;
             background: bisque
         }
         
         .box3 {
-            width: 226px;
-            height: 170px;
-            margin-top: 0;
-            margin-left: 10px;
+            width: 370px;
+            height: 400px;
+            padding-right: 30px;
+            margin-top: 30px;
             background: azure;
             float: left
+        }
+        
+        .box4 {
+            width: 370px;
+            padding-right: 30px;
+            margin-top: 30px;
+            height: 160px;
+            float: left;
+            background: azure;
         }
     </style>
     <script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=7rk2V6zD49gvsR41OwylhifNcgMYGCGh"></script>
@@ -76,34 +90,35 @@
         </div>
         <div id="cc" style="float:left;margin-left:50px;font-size:30px;width:100px;height:100px;text-align:center;line-height: 100px;background: blueviolet;">{{Data.city}}</div>
     </div>
-    <div style="width:1030px;margin:auto;">
-        <div id="searchbox" class="box1" style="width:700px;margin-left:0;background:white">
-            <div id="searchbox" class="box2" style="margin-top:0;height:120px">
-
-            </div>
-            <div id="searchbox" class="box2" style="height:170px;">
-                <div id="searchbox" class="box3" style="margin-left:0;width:228px">
-                    <p>{{Data.weather}} {{Data.city}} {{Data.temperature}}</p>
-                    <p>空气指数：{{Data.air_aqi}}</p>
-                    <p>空气质量：{{Data.air_quality}} pm2.5指数：{{Data.air_pm25}}</p>
-                    <p>主要污染物：{{Data.air_primary}} 建议：{{Data.air_suggestion}}</p>
-                    <p>总体情况：{{Data.live_comfort}}</p>
-                </div>
-                <div id="searchbox" class="box3">
-                    {% for i in Data.news %}
-                    <p>
-                        <a href="{{i[1]}}">{{i[0]}}</a>
-                    </p>
-                    {% endfor %}
-                </div>
-                <div id="searchbox" class="box3">
-
-                </div>
-            </div>
+    <div style="width:1030px;margin:auto;margin-top:50px;">
+        <div id="searchbox" class="box2" style="margin-top:0;height:120px">
+            <a href="{{Data.webUrl}}"><b>{{Data.webPage}}</b></a>
+            <p>{{Data.webSnippet}}</p>
         </div>
-        <div id="searchbox" class="box1" style="width:300px;">
+
+        <div id="searchbox" class="box3">
+            {% for i in Data.news %}
+            <p>
+                <a href="{{i[1]}}"><b>{{i[0]}}</b></a>
+                <hr>
+            </p>
+            {% endfor %}
+        </div>
+        <div id="searchbox" class="box1" style="width:600px;">
             <div id="allmap"></div>
         </div>
+        <div id="searchbox" class="box4">
+            <p>天气：{{Data.weather}} 温度：{{Data.temperature}}°C</p>
+            <p>总体情况：{{Data.live_comfort}}</p>
+            <p>建议：{{Data.air_suggestion}}</p>
+        </div>
+        <div id="searchbox" class="box4" style="width:570px;margin-left:30px">
+            <p>空气指数：{{Data.air_aqi}}</p>
+            <p>空气质量：{{Data.air_quality}} </p>
+            <p>pm2.5指数：{{Data.air_pm25}} </p>
+            <p>主要污染物：{{Data.air_primary}}</p>
+        </div>
+
     </div>
 </body>
 
