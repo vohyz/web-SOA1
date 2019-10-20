@@ -130,10 +130,10 @@ def request3(appkey, city, m="GET"):
 
 #新闻查询
 def request4(appkey, city, m="GET"):
-    appkey = "f598ed3b6a2b4b67834bccf4ef48057a"
+    appkey = "336144f41e3f489b98228d6f91d8fe61"
     url = "http://route.showapi.com/170-47"
     params = {
-        "showapi_appid" : "106801",
+        "showapi_appid" : "107028",
         "showapi_sign" : appkey, #你申请的key
         "areaName" : city,
     }
@@ -146,7 +146,7 @@ def request4(appkey, city, m="GET"):
     content = f.read()
     res = json.loads(content)
     global news
-     
+    print(res)
     if res:
         rst = res["showapi_res_body"]["pagebean"]["contentlist"]
         n = 0
@@ -157,7 +157,6 @@ def request4(appkey, city, m="GET"):
             else:
                 break
             n += 1
-    
         news = prm
     else:
         return {"error" : "lost api"}
