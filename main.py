@@ -12,7 +12,7 @@ from msrest.authentication import CognitiveServicesCredentials
 
 app = Flask(__name__)
 appkey1 = "SqDC76itesKz0z_uF"
-subscription_key = "b7959ce83d8d4d778e11a93f92dab4de"
+subscription_key = "15326ea08b0b4b21acd9f50074d345d2"
 
 weather = {}
 live = {}
@@ -80,7 +80,8 @@ def request1(appkey, city, m="GET"):
         rst = res["results"][0]["now"]
         weather = rst
     else:
-        return {"error" : "lost api"}
+        weather["temperature"] = '无'
+        weather["text"] = '无'
 
 #生活指数信息查询
 def request2(appkey, city, m="GET"):
@@ -103,7 +104,7 @@ def request2(appkey, city, m="GET"):
         rst = res["results"][0]["suggestion"]
         live = rst
     else:
-        return {"error" : "lost api"}
+        live["comfort"]["brief"] = '无'
 
 #空气质量信息查询
 def request3(appkey, city, m="GET"):
@@ -126,7 +127,9 @@ def request3(appkey, city, m="GET"):
         rst = res["results"][0]["air"]["city"]
         air = rst
     else:
-        return {"error" : "lost api"}
+        air["aqi"] = '无'
+        air["pm25"] = '无'
+        air["primary_pollutant"] = '无'
 
 #新闻查询
 def request4(appkey, city, m="GET"):
@@ -179,7 +182,7 @@ def web_results_with_count_and_offset(subscription_key, city):
              web pages returned.
              '''
              #print("Webpage Results#{}".format(len(web_data.web_pages.value)))
-
+             print(web_data.web_pages.value)
              for i in web_data.web_pages.value:
                  if "百科" in format(i.name):
                      webPage = format(i.name)
@@ -203,3 +206,4 @@ def web_results_with_count_and_offset(subscription_key, city):
 if __name__ == "__main__":
     app.run(host="127.0.0.1",port=5000,debug = True)
     #print(request4("f598ed3b6a2b4b67834bccf4ef48057a", "北京"))
+    #web_results_with_count_and_offset(subscription_key, '上海')
